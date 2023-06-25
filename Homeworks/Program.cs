@@ -56,7 +56,7 @@
                 Console.WriteLine($"{sum} - Це число парне");
             }
             else {
-                Console.WriteLine($"{sum} - Це число не парне");
+                Console.WriteLine($"{sum} - Це число непарне");
             }
         }
 
