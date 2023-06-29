@@ -2,39 +2,53 @@
 {
     internal class Program
     {
-        // Homework lesson-5
+        enum WeekDays
+        {
+            Monday,
+            Tuesday,
+            Wednesday,
+            Thursday,
+            Friday,
+            Saturday,
+            Sunday
+        }
+
+        // Homework lesson-6
 
         static void Main (string[] args)
         {
-            int iRef = 0; 
-            var someOut = 5;
+            var firstDay = WeekDays.Monday;
+            var numFirstDay = (int)WeekDays.Monday;
+            var element = 2;
+            WeekDays weekDays = (WeekDays)Enum.Parse(typeof(WeekDays), element.ToString());
+            Console.WriteLine(weekDays);
+            int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int[] r1 = a[1..5];
 
-            PrintValue(5,"Vlad",out someOut,ref iRef,5);
+            int[] r2 = a[5..];
+            int r3 = a[^1];
+            Console.WriteLine(r3);
 
-            Console.WriteLine(someOut);
-            Console.WriteLine(iRef);
-            Console.WriteLine(SomeMethod("Name",new string[] {"Vlad","Misha","Nikita"}));
-        }
-        
-        static string SomeMethod(string title, params string[] words)
-        {
-            string head = title + ": ";
-
-            foreach(var word in words) {
-                head += word + ", ";
+            int[] mas = { 1, 2, 3, 4 };
+            Array.Resize(ref mas, 5);
+            foreach (int a1 in mas) {
+                Console.WriteLine(a1);
             }
+            Tuple<int, string, string> person =
+                new Tuple<int, string, string>(1, "Steve", "Jobs");
+            var person1 = Tuple.Create(1, "Steve", "Jobs");
+            var persons = new[] { person, person1 };
+            var age = person.Item1;
+            var name = person.Item2;
+            var group = person.Item3;
 
-            return head;
+            PrintTuple(person1);
+
         }
 
-
-        static void PrintValue (int val, string str, out int res, ref int someValue, int opt = 1)
+        static void PrintTuple (Tuple<int, string, string> tuple)
         {
-            someValue = someValue + 1;
-            val = someValue + opt + 5;
-            res = opt + 1;
-            Console.WriteLine($"{val},{str},{someValue},{res},{opt}");
-
+            Console.WriteLine(tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
         }
 
     }
