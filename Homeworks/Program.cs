@@ -51,5 +51,27 @@
             Console.WriteLine(tuple.Item1 + " " + tuple.Item2 + " " + tuple.Item3);
         }
 
+        static int[] SelectionSort (bool Asc, params int[] source)
+        {
+            var n = source.Length;
+            for(int i = 0; i < n-1; i++) {
+                var minIndex = i;
+                for(var j = i + 1; j < n; j++) {
+                    if(Asc && source[j] < source[minIndex]) {
+                        minIndex = j;
+                    }
+                    if(!Asc && source[j] > source[minIndex]) {
+                        minIndex = j;
+                    }
+                }
+                var temp = source[minIndex];
+                source[minIndex] = source[i];
+                source[i] = temp;
+              //  (source[minIndex], source[i]) = (source[i], source[minIndex]); the same
+
+            }
+            return source;
+        }
+       
     }
 }
