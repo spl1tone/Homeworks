@@ -1,75 +1,117 @@
 ﻿namespace Homeworks
 {
+
+    public enum SortAlgorithmType
+    {
+        Selection,
+        Bubble,
+        Insertion
+    }
+
+    public enum OrderBy
+    {
+        Asc,
+        Desc
+    }
+
     internal class Program
     {
-        // Homework lesson-5
+        // Homework lesson-7
 
         static void Main (string[] args)
         {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
+            int[] array = { 10, 50, 40, 70, 60, 30, 20};
+            Sort(array, SortAlgorithmType.Bubble, OrderBy.Asc);
+            foreach(var arr in array) {
+                Console.WriteLine(arr); // 10, 20, 30, 40, 50, 60, 70
+            }
         }
 
-        static int MaxValue (int num1, int num2)
+
+        public static void Sort (int[] array, SortAlgorithmType algType, OrderBy orderBy)
         {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
+            switch (algType) {
+                case SortAlgorithmType.Selection:
+                    Selection_Sort(array, orderBy);
+                    break;
+                case SortAlgorithmType.Bubble:
+                    Bubble_Sort(array, orderBy);
+                    break;
+                case SortAlgorithmType.Insertion:
+                    Insertion_Sort(array, orderBy);
+                    break;
+            }
         }
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
+        public static void Selection_Sort (int[] array, OrderBy orderBy)
         {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
+            int n = array.Length;
+
+            for (int i = 0; i < n - 1; i++) {
+                int minIndex = i;
+
+                for (int j = i + 1; j < n; j++) {
+                    if (IsSwap(array[j], array[minIndex], orderBy)) {
+                        minIndex = j;
+                    }
                 }
-            }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
-                }
-            }
-            else {
-                sum = num1;          
-            }
 
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
+                SwapNum(array, i, minIndex);
             }
         }
 
-        static string Repeat(string text,int count)
+        public static void Bubble_Sort (int[] array, OrderBy orderBy)
         {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
-        }
-        
+            int n = array.Length;
 
-        
+            for (int i = 0; i < n - 1; i++) {
+                bool swapped = false;
+
+                for (int j = 0; j < n - i - 1; j++) {
+                    if (IsSwap(array[j], array[j + 1], orderBy)) {
+                        SwapNum(array, j, j + 1);
+                        swapped = true;
+                    }
+                }
+
+                if (!swapped) break;
+            }
+        }
+
+        public static void Insertion_Sort (int[] array, OrderBy orderBy)
+        {
+            int n = array.Length;
+
+            for (int i = 1; i < n; i++) {
+                int key = array[i];
+                int j = i - 1;
+
+                while (j >= 0 && IsSwap(array[j], key, orderBy)) {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+
+                array[j + 1] = key;
+            }
+        }
+
+        public static bool IsSwap (int a, int b, OrderBy orderBy)
+        {
+            return orderBy == OrderBy.Asc ? a > b : a < b;
+        }
+
+        public static void SwapNum (int[] array, int i, int j)
+        {
+        /*    int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp; */
+            (array[i], array[j]) = (array[j], array[i]);
+
+        }
+
+
     }
+
+   
+
 }
