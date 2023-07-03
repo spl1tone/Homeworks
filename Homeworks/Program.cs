@@ -15,6 +15,10 @@
 
             string sorted = Sort("Hello");
             Console.WriteLine($"Sorted: {sorted}");
+
+            char[] repeatChars = Duplicate("Hello and Hi");
+            Console.WriteLine($"Duplicate: {new string(repeatChars)}");
+
         }
 
         static bool Compare (string str1, string str2)
@@ -51,6 +55,55 @@
         {
             var sorted = str.OrderBy(x => x);
             return new string(sorted.ToArray());
+        }
+
+        static char[] Duplicate(string str)
+        {
+            char[] duplicate = new char[0];
+            char[] seenChars = new char[str.Length];
+
+            int seenIndex = 0;
+            int duplicateIndex = 0;
+
+            foreach(char c  in str) {
+
+                bool isDuplicate = false;
+
+                for(int i = 0; i < seenIndex; i++) {
+
+                    if(c == seenChars[i]) {
+                        isDuplicate = true;
+                        break;
+                    }
+
+                }
+
+                if (isDuplicate) {
+
+                    bool isAdded = false;
+
+                    for(int i = 0; i < duplicateIndex; i++) {
+
+                        if(c == duplicate[i]) {
+                            isAdded = true;
+                            break;
+                        }
+                        
+                    }
+
+                    if (!isAdded) {
+                        Array.Resize(ref duplicate, duplicate.Length + 1);
+                        duplicate[duplicateIndex++] = c;
+                    }
+
+                }
+
+                else {
+                    seenChars[seenIndex++] = c;
+                }
+
+            }
+            return duplicate;
         }
     }
 }
