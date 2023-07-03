@@ -2,74 +2,25 @@
 {
     internal class Program
     {
-        // Homework lesson-5
+        // Homework lesson-7
 
         static void Main (string[] args)
         {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
+           bool isCompare = Compare("Test", "Tast");
+           Console.WriteLine(isCompare); // False
+
+
         }
 
-        static int MaxValue (int num1, int num2)
+        static bool Compare (string str1, string str2)
         {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
+            if(str1.Length != str2.Length) return false;
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
-        {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
-                }
-            }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
-                }
-            }
-            else {
-                sum = num1;          
+            for(int i = 0; i < str1.Length; i++) {
+                if (str1[i] != str2[i]) break; return false;
             }
 
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
-            }
+            return true;
         }
-
-        static string Repeat(string text,int count)
-        {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
-        }
-        
-
-        
     }
 }
