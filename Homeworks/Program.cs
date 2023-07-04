@@ -47,6 +47,16 @@ namespace Homeworks
 
             Console.WriteLine(firstI);
             Console.WriteLine(secondI);
+
+            string filePath = "C:/example.txt";
+            string p2 = "Text.txt";
+
+            if (File.Exists(filePath)) {
+                Console.WriteLine("The file exists.");
+            }
+            else {
+                Console.WriteLine("The file does not exist.");
+            }
         }
         
     }
