@@ -2,74 +2,60 @@
 {
     internal class Program
     {
-        // Homework lesson-5
+        // Homework Text
+
 
         static void Main (string[] args)
         {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
-        }
+            string path = @"PhoneBook.txt";
 
-        static int MaxValue (int num1, int num2)
-        {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
+            if (File.Exists(path)) {
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
-        {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
+                Console.WriteLine("PhoneBook: \n{0}",File.ReadAllText(path));
+
+                Console.WriteLine(new String('-',25));
+
+                try {
+                    string[] lines = File.ReadAllLines(path);
+
+                    Console.WriteLine("Choose Criteria:");
+                    string searchCriteria = Console.ReadLine();
+
+                    bool IsFound = false;
+
+                    foreach (string line in lines) {
+                        string[] parts = line.Split(' ');
+
+                        if (parts.Length == 3) {
+                            string Name = parts[0];
+                            string LastName = parts[1];
+                            string PhoneNumber = parts[2];
+
+                            if (Name.Contains(searchCriteria, StringComparison.OrdinalIgnoreCase) ||
+                                LastName.Contains(searchCriteria, StringComparison.OrdinalIgnoreCase) ||
+                                PhoneNumber.Contains(searchCriteria, StringComparison.OrdinalIgnoreCase)) {
+                                Console.WriteLine("FirstName: " + Name);
+                                Console.WriteLine("LastName: " + LastName);
+                                Console.WriteLine("Phone: " + PhoneNumber);
+                                Console.WriteLine();
+
+                                IsFound = true;
+                            }
+                        }
+                    }
+
+                    if (!IsFound) {
+                        Console.WriteLine("Wrong Criteria");
+                    }
                 }
-            }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
+                catch (IOException e) {
+                    Console.WriteLine(e.Message);
                 }
-            }
-            else {
-                sum = num1;          
-            }
 
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
-            }
-        }
+            } 
 
-        static string Repeat(string text,int count)
-        {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
+        }  
+
         }
         
-
-        
-    }
 }
