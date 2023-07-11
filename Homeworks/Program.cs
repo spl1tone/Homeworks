@@ -2,16 +2,16 @@
 
 internal class Program
 {
-    // Homework Text
+    // Homework Exceptions
 
 
     static void Main (string[] args)
     {
         string path = @"PhoneBook.txt";
 
-              if (File.Exists(path)) {
+                  if(!File.Exists(path)) Console.WriteLine("Wrong Path To File");
 
-                  Console.WriteLine("PhoneBook: \n{0}",File.ReadAllText(path));
+        Console.WriteLine("PhoneBook: \n{0}",File.ReadAllText(path));
 
                   Console.WriteLine(new String('-',30));
 
@@ -19,7 +19,7 @@ internal class Program
                       string[] lines = File.ReadAllLines(path);
 
                       Console.Write("Search Contact:");
-                      string SearchContact = Console.ReadLine();
+                      string? SearchContact = Console.ReadLine();
 
                       bool IsFound = false;
 
@@ -53,7 +53,7 @@ internal class Program
                       Console.WriteLine(e.Message);
                   }
             Sort(path);
-        }
+        
         
     }  
 
@@ -83,7 +83,13 @@ internal class Program
         }
 
         Console.Write("Choose Sort Criteria (1-Name,2-LastName,3-Phone): ");
-        SortCriteria(path, Names, LastNames,Phones,Convert.ToInt32(Console.ReadLine()));
+        try {
+            SortCriteria(path, Names, LastNames, Phones, Convert.ToInt32(Console.ReadLine()));
+        }
+        catch(Exception e) {
+            Console.WriteLine(e.Message);
+        }
+
     }
 
     static void SortCriteria (string path, string[] Names, string[] LastNames, string[] Phones, int criteriaNum)
