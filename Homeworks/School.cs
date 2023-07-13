@@ -90,9 +90,9 @@ record Class
         Students.Remove(student);
     }
 
-    public void CreateSchedule (Class @class, DateTime startTime, DateTime endTime)
+    public void CreateSchedule (DateTime startTime, DateTime endTime)
     {
-        Console.WriteLine($"For class: {@class.ClassName}, lessons starts at {startTime.ToString()}, and ends at {endTime.ToString()}");
+        Console.WriteLine($"For class: {ClassName}, lessons starts at {startTime.ToString()}, and ends at {endTime.ToString()}");
     }
 
 }
@@ -108,12 +108,8 @@ record Teacher
     {
         get { return pwd; }
         set
-        {
-            int i = 0;
-            foreach (char c in pwd) {
-                i++;
-            }
-            if (i < 4) {
+        {       
+            if (value.Length < 4) {
                 Console.WriteLine("Password must be more than 4 characters");
             }
             else {
@@ -121,26 +117,28 @@ record Teacher
             }
         }
     }
-    public Subjects Subject { get; set; } = new();
+    public Subjects Subject { get; set; }
 
     public Teacher ()
     {
 
     }
 
-    public Teacher (string firstName, string lastName)
+    public Teacher (string firstName, string lastName,Subjects subject)
     {
         FirstName = firstName;
         LastName = lastName;
+        Subject = subject;
     }
 
-    public Teacher (int id, string firstName, string lastName, string email, string password)
+    public Teacher (int id, string firstName, string lastName, string email, string password,Subjects subject)
     {
         Id = id;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Password = password;
+        Subject = subject;
     }
 
     public void UpdateTeacherInf (Teacher teacher, string newFirstName, string newLastName, Subjects newSubject)
@@ -149,6 +147,9 @@ record Teacher
         teacher.LastName = newLastName;
         teacher.Subject = newSubject;
     }
+
+    public string TeacherInfo () => $"{FirstName} {LastName} {Email} {Subject.SubjectName}";
+
 }
 
 record Students
@@ -162,12 +163,8 @@ record Students
     {
         get { return pwd; }
         set
-        {
-            int i = 0;
-            foreach (char c in pwd) {
-                i++;
-            }
-            if (i < 4) {
+        {   
+            if (value.Length < 4) {
                 Console.WriteLine("Password must be more than 4 characters");
             }
             else {
@@ -187,12 +184,15 @@ record Students
     public Students (string firstName, string lastName)
     {
         FirstName = firstName;
-        LastName = lastName;
+        LastName = lastName;       
     }
-    public Students (string firstName, string lastName, Course course)
-    {
+    public Students (int id, string firstName, string lastName, string email, string password, Course course)
+    {    
+        Id = id;
         FirstName = firstName;
         LastName = lastName;
+        Email = email;
+        Password = password;
         Courses.Add(course);
     }
     public Students (string firstName, string lastName, List<Course> courses)
@@ -222,6 +222,13 @@ record Course
         CourseName = courseName;
         Description = description;
     }
+    public Course (int id, string courseName, string description, Teacher teacher)
+    {
+        Id = id;
+        CourseName = courseName;
+        Description = description;
+        Teacher = teacher;
+    }
     public Course (int id, string courseName, string description, Teacher teacher, Module module, Students student)
     {
         Id = id;
@@ -240,6 +247,8 @@ record Course
         Modules = modules;
         Students = students;
     }
+
+    public string CourseInfo () => $"{CourseName} {Description}";
 
     public bool CourseEquals (Course course) =>
         Id == course.Id &&
@@ -305,8 +314,7 @@ record Assignment
 
 record Subjects
 {
-    public string SubjectName { get; set; } = "Default Subject";
-    public Teacher Teacher { get; set; } = new();
+    public string SubjectName { get; set; } = "Default Subject Name";
 
     public Subjects ()
     {
@@ -316,10 +324,5 @@ record Subjects
     public Subjects (string subjectName)
     {
         SubjectName = subjectName;
-    }
-    public Subjects (string subjectName, Teacher teacher)
-    {
-        SubjectName = subjectName;
-        Teacher = teacher;
     }
 }
