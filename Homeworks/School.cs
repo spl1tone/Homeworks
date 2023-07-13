@@ -1,6 +1,6 @@
 ﻿namespace Homeworks;
 
-record School
+internal record School
 {
     public string SchoolName { get; set; } = "Default School Name";
 
@@ -52,7 +52,7 @@ record School
     }
 }
 
-record Class
+internal record Class
 {
     public string ClassName { get; set; } = "Default Class Name";
     public Teacher Teacher { get; set; } = new();
@@ -97,7 +97,7 @@ record Class
 
 }
 
-record Teacher
+internal record Teacher
 {
     string pwd;
     public int Id { get; set; } = 1;
@@ -152,7 +152,7 @@ record Teacher
 
 }
 
-record Students
+internal record Students
 {
     string pwd;
     public int Id { get; set; } = 1;
@@ -203,7 +203,7 @@ record Students
     }
 }
 
-record Course
+internal record Course
 {
     public int Id { get; set; } = 1;
     public string CourseName { get; set; } = "Default Course";
@@ -256,7 +256,7 @@ record Course
         Description == course.Description;
 }
 
-record Module
+internal record Module
 {
     public int Id { get; set; } = 1;
     public string ModuleName { get; set; } = "Default module";
@@ -288,7 +288,7 @@ record Module
     }
 }
 
-record Assignment
+internal record Assignment
 {
     public int Id { get; set; } = 1;
     public string AssignmentName { get; set; } = "Default AssignmentName";
@@ -312,7 +312,7 @@ record Assignment
     }
 }
 
-record Subjects
+internal record Subjects
 {
     public string SubjectName { get; set; } = "Default Subject Name";
 
