@@ -2,12 +2,12 @@
 
 internal class Wheel : Vehicle
 {
-    public string Model { get; set; }
-    public int Radius { get; set; }
+    public string Model { get; set; } = "Model";
+    public int Radius { get; set; } = 0;
     /// <summary>
     ///  <param name="Season">True - Winter, False - Summer</param>
     /// </summary>
-    public bool Season { get; set; }
+    public bool Season { get; set; } = true;
     public Disk disk { get; set; }
 
     public Wheel ()

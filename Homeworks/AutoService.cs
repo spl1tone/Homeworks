@@ -2,7 +2,7 @@
 
 internal class AutoService
 {
-    public string ServiceName { get; set; }
+    public string ServiceName { get; set; } = "Service Name";
     public List<Vehicle> vehicles { get; set; }
 
     public AutoService ()
@@ -10,11 +10,13 @@ internal class AutoService
 
     }
 
-    public AutoService(string serviceName,Vehicle vehicles)
+    public AutoService(string serviceName,Vehicle vehicle)
     {
         ServiceName = serviceName;
-        this.vehicles.Add(vehicles);
+        vehicles.Add(vehicle);
     }
 
-    public int Price { get; set; }
+    public void AddVehicle (Vehicle vehicle) => vehicles.Add(vehicle);
+    public void RemoveVehicle (Vehicle vehicle) => vehicles.Remove(vehicle);
+
 }

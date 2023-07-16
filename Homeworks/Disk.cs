@@ -2,9 +2,9 @@
 
 internal class Disk : Wheel
 {
-    public string Name { get; set; }
-    public int Radius { get; set; }
-    public int Size { get; set; }
+    public string Name { get; set; } = "Name";
+    public int Radius { get; set; } = 0;
+    public int Size { get; set; } = 0;
 
     public Disk ()
     {

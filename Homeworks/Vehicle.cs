@@ -2,9 +2,9 @@
 
 internal class Vehicle : AutoService
 {
-    public string Name { get; set; }
-    public int Year { get; set; }
-    public string Model { get; set; }
+    public string Name { get; set; } = "Name";
+    public int Year { get; set; } = 0;
+    public string Model { get; set; } = "Model"; 
 
     public Vehicle ()
     {

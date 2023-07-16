@@ -2,26 +2,26 @@
 
 internal class Engine : Vehicle
 {
-    public string CreatorName { get; set; }
-    public int Power { get; set; }
-    public int Temperature { get; set; }
-    public int cylinderCount { get; set; }
+    public string CreatorName { get; set; } = "Name";
+    public int Power { get; set; } = 0;
+    public int maxTemperature { get; set; } = 0;
+    public int cylinderCount { get; set; } = 0;
 
     public Engine ()
     {
 
     }
 
-    public Engine (string creatorName, int power, int temperature, int cylinderCount)
+    public Engine (string creatorName, int power, int maxTemperature, int cylinderCount)
     {
         CreatorName = creatorName;
         Power = power;
-        Temperature = temperature;
+        this.maxTemperature = maxTemperature;
         this.cylinderCount = cylinderCount;
     }
 
     public override void PrintInfo ()
     {
-        Console.WriteLine($"CreatorName: {CreatorName}\nPower: {Power}\nTemperature: {Temperature}\nCylinders: {cylinderCount}");
+        Console.WriteLine($"CreatorName: {CreatorName}\nPower: {Power}\nTemperature: {maxTemperature}\nCylinders: {cylinderCount}");
     }
 }

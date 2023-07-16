@@ -5,8 +5,15 @@ internal class Program
 
     static void Main (string[] args)
     {
-    /*    Wheel wheel = new("asd", 123, true, new Disk("asd", 123, 123));
-        wheel.PrintInfo();*/
+        var service = new AutoService();
+        service.ServiceName = "Alden";
+        var vehicle = new Vehicle("BMW", 2010, "X7");
+        var engine = new Engine("Vlad", 660, 1200, 8);
+        var wheel = new Wheel("Good Year", 21, false, new Disk("Some Name", 21, 21));
+        var othercomponents = new Other_Components(100, 100, 100, 100);
+
+        service.AddVehicle(vehicle);
+
     }
 
 }
