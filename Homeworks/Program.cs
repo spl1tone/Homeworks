@@ -1,75 +1,96 @@
-﻿namespace Homeworks
+﻿namespace Homeworks;
+
+public class Program
 {
-    internal class Program
+    public static void Main (string[] args)
     {
-        // Homework lesson-5
+        Shop shop = new Shop();
 
-        static void Main (string[] args)
-        {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
-        }
+        while (true) {
+            Console.WriteLine("1. Register Product");
+            Console.WriteLine("2. Add Quantity");
+            Console.WriteLine("3. Sell Product");
+            Console.WriteLine("4. Register Buyer");
+            Console.WriteLine("5. Exit");
 
-        static int MaxValue (int num1, int num2)
-        {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
+            Console.Write("Enter your choice: ");
+            string choice = Console.ReadLine();
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
-        {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
-                }
-            }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
-                }
-            }
-            else {
-                sum = num1;          
+            switch (choice) {
+                case "1":
+                Console.Write("Product name: ");
+                string productName = Console.ReadLine();
+
+                Console.Write("Product description: ");
+                string productDescription = Console.ReadLine();
+
+                Console.Write("Product price: ");
+                float productPrice = float.Parse(Console.ReadLine());
+
+                Console.Write("Product quantity: ");
+                int productQuantity = int.Parse(Console.ReadLine());
+
+                shop.RegisterProduct(productName, productPrice, productQuantity, productDescription);
+
+                break;
+
+                case "2":
+                Console.Write("Product name: ");
+                string existProductName = Console.ReadLine();
+
+                Console.Write("Quantity to add: ");
+                int quantityAdd = int.Parse(Console.ReadLine());
+
+                shop.AddQuantity(existProductName, quantityAdd);
+
+                break;
+
+                case "3":
+                Console.Write("Product name: ");
+                string productToSell = Console.ReadLine();
+
+                Console.Write("Buyer id: ");
+                int buyerId = int.Parse(Console.ReadLine());
+
+                Console.Write("Buyer name: ");
+                string buyerName = Console.ReadLine();
+
+                Console.Write("Buyer address: ");
+                string buyerAddress = Console.ReadLine();
+
+                Console.Write("Buyer email: ");
+                string buyerEmail = Console.ReadLine();
+
+                shop.SellProduct(buyerId, productToSell, buyerName, buyerAddress, buyerEmail);
+
+                break;
+
+                case "4":
+                Console.Write("Buyer id: ");
+                int buyerIdRegister = int.Parse(Console.ReadLine());
+
+                Console.Write("Buyer name: ");
+                string buyerNameRegister = Console.ReadLine();
+
+                Console.Write("Buyer address: ");
+                string buyerAddressRegister = Console.ReadLine();
+
+                Console.Write("Buyer email: ");
+                string buyerEmailRegister = Console.ReadLine();
+
+                shop.RegisterBuyer(buyerIdRegister, buyerNameRegister, buyerAddressRegister, buyerEmailRegister);
+                break;
+
+                case "5":
+                Console.WriteLine("Goodbye");
+                return;
+
+                default:
+                Console.WriteLine("Wrrong input");
+                break;
             }
 
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
-            }
+            Console.WriteLine();
         }
-
-        static string Repeat(string text,int count)
-        {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
-        }
-        
-
-        
     }
 }
