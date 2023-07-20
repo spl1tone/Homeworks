@@ -2,10 +2,10 @@
 
 public class Program
 {
+
     public static void Main (string[] args)
     {
         Shop shop = new Shop();
-
         while (true) {
             Console.WriteLine("1. Register Product");
             Console.WriteLine("2. Add Quantity");

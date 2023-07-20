@@ -32,33 +32,16 @@ internal class Shop : IShop
     public void AddQuantity (string productName, int quantity)
     {
         Product product = products.Find(x => x.Name == productName);
-
-        if (product != null) {
             product.Quantity += quantity;
             Console.WriteLine("Quantity added");
-        }
-        else {
-            Console.WriteLine("Product not found");
-        }
     }
 
     public void SellProduct (int id, string productName, string buyerName, string buyerAddress, string buyerEmail)
     {
         Product product = products.Find(x => x.Name == productName);
-
-        if (product != null && product.Quantity > 0) {
-            Buyer buyer = buyers.Find(x => x.Name == buyerName);
-
-            if (buyer == null) {
-                buyer = new Buyer {
-                    Id = id,
-                    Name = buyerName,
-                    Address = buyerAddress,
-                    Email = buyerEmail
-                };
-
-                buyers.Add(buyer);
-            }
+        Buyer buyer = buyers.Find(x => x.Name == buyerName);
+        buyers.Add(buyer);
+            
 
             Receipt receipt = new Receipt {
                 Product = product,
@@ -72,10 +55,6 @@ internal class Shop : IShop
 
             Console.WriteLine("Product sold");
         }
-        else {
-            Console.WriteLine("Product not available");
-        }
-    }
 
     public void RegisterBuyer (int id, string name, string address, string email)
     {
@@ -90,3 +69,4 @@ internal class Shop : IShop
         Console.WriteLine("Buyer registered");
     }
 }
+
