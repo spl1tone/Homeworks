@@ -1,6 +1,6 @@
 ﻿namespace Homeworks;
 
-internal class Shop
+internal class Shop : IShop
 {
     public string ShopName { get; set; } = "Shop Name";
     public string ShopLocation { get; set; } = "Shop Location";
