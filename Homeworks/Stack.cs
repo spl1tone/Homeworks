@@ -43,16 +43,4 @@ internal class Stack<T>
     {
         objects.Clear();
     }
-
-
-
-
-    /*Push (obj) - adds obj at the top of stack
-    Pop () - returns top element of stack & removes it
-    Clear () - clear stack
-    Count - property return number of elements
-    Peek () - returns top element but doesn’t remove it
-    CopyTo (arr) - copies stack to array*/
-
-
 }

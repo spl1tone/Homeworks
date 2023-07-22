@@ -11,17 +11,17 @@ internal class Program
         stack.Push(3);
         stack.Push(4);
 
-        int pop = stack.Pop();
+        var pop = stack.Pop();
         Console.WriteLine("Pop: " + pop);
 
-        int peek = stack.Peek();
+        var peek = stack.Peek();
         Console.WriteLine("Peek: " + peek);
 
         int[] array = new int[0];
         stack.CopyTo(ref array);
         Console.WriteLine("Array: " + string.Join(", ", array));
 
-        int count = stack.Count();
+        var count = stack.Count();
         Console.WriteLine($"Count: {count}");
 
         stack.Clear();
