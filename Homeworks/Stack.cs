@@ -4,15 +4,10 @@ internal class Stack<T>
 {
     private List<T> objects;
 
-    public Stack ()
-    {
-        objects = new();
-    }
+    public Stack () => objects = new();
 
-    public void Push (T obj)
-    {
-        objects.Add(obj);
-    }
+
+    public void Push (T obj) => objects.Add(obj);
 
     public T Pop ()
     {
@@ -34,13 +29,8 @@ internal class Stack<T>
         array = objects.ToArray();
     }
 
-    public int Count ()
-    {
-        return objects.Count;
-    }
+    public int Count () { return objects.Count; }
 
-    public void Clear ()
-    {
-        objects.Clear();
-    }
+
+    public void Clear () => objects.Clear();
 }
