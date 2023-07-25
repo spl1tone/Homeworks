@@ -1,75 +1,73 @@
-﻿namespace Homeworks
+﻿namespace Homeworks;
+
+class Program
 {
-    internal class Program
+    static List<Topic> topics = new();
+
+    static void Main (string[] args)
     {
-        // Homework lesson-5
+        var id = 0;
 
-        static void Main (string[] args)
-        {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
-        }
+        while (true) {
+            Console.WriteLine("1 Create Topic");
+            Console.WriteLine("2 Vote For Topic");
+            Console.WriteLine("3 See Vote Results");
+            Console.WriteLine("4 Exit");
 
-        static int MaxValue (int num1, int num2)
-        {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
+            string input = Console.ReadLine();
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
-        {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
-                }
-            }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
-                }
-            }
-            else {
-                sum = num1;          
+            switch (input) {
+                case "1":
+                    id++;
+                    CreateTopic(id);
+                    break;
+                case "2":
+                    VoteForTopic();
+                    break;
+                case "3":
+                    PrintVoteResults();
+                    break;
+                case "4":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Wrrong input");
+                    break;
             }
 
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
-            }
+            Console.WriteLine();
         }
-
-        static string Repeat(string text,int count)
-        {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
-        }
-        
-
-        
     }
+
+    static void CreateTopic (int id)
+    {
+        Topic topic = new();
+        Console.WriteLine("Enter Topic Name:");
+        topic.CreateTopic(id, Console.ReadLine());
+        topics.Add(topic);
+        Console.WriteLine("Topic added");
+    }
+    static void VoteForTopic ()
+    {
+        Console.WriteLine("Enter Topic Name To Vote: ");
+        string topicName = Console.ReadLine();
+        var topic = topics.Find(x => x.TopicName == topicName);
+        if (topic == null) Console.WriteLine("Wrrong Topic Name");
+        else {
+            Console.WriteLine("Enter Vouter Name: ");
+            topic.AddVoute(Console.ReadLine());
+        }
+
+    }
+    static void PrintVoteResults ()
+    {
+        if (topics.Count == 0) Console.WriteLine("Add Some Topics To View Results");
+        else {
+            foreach (var c in topics) {
+                c.PrintResults();
+            }
+        }
+    }
+
 }
+
