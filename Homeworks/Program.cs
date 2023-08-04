@@ -1,75 +1,41 @@
-﻿namespace Homeworks
+﻿using System.Reflection;
+namespace Homeworks;
+
+internal class Program
 {
-    internal class Program
+    static void Main ()
     {
-        // Homework lesson-5
+        Console.WriteLine("Enter the path to the assembly file:");
+        string path = Console.ReadLine(); // .dll
 
-        static void Main (string[] args)
-        {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
-        }
+        try {
+            Assembly targetAssembly = Assembly.LoadFrom(path);
 
-        static int MaxValue (int num1, int num2)
-        {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
+            var types = targetAssembly.GetTypes();
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
-        {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
+            foreach (var type in types) {
+                Console.WriteLine($"NameSpace: {type.Namespace}");
+                Console.WriteLine($"Class Name: {type.Name}");
+
+                var methods = type.GetMethods();
+
+                foreach (var method in methods) {
+                    Console.WriteLine($"  Method Name: {method.Name}");
+
+                    var parameters = method.GetParameters();
+                    foreach (var parameter in parameters) {
+                        Console.WriteLine($"Param Name: {parameter.Name} - Type: {parameter.ParameterType}");
+                    }
+
+                    Console.WriteLine($"Return Type: {method.ReturnType}");
                 }
-            }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
-                }
-            }
-            else {
-                sum = num1;          
-            }
-
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
+                Console.WriteLine();
             }
         }
-
-        static string Repeat(string text,int count)
-        {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
+        catch (Exception e) {
+            Console.WriteLine($"Error loading: {e.Message}");
         }
-        
 
-        
+        Console.ReadLine();
     }
 }
