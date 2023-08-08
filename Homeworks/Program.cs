@@ -1,75 +1,31 @@
-﻿namespace Homeworks
+﻿namespace Homeworks;
+
+internal class Program
 {
-    internal class Program
+    static void Main ()
     {
-        // Homework lesson-5
+        Calendar calendar = new Calendar();
+        bool isReadOnly = false; // ReadOnly / RW mode
 
-        static void Main (string[] args)
-        {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
-        }
-
-        static int MaxValue (int num1, int num2)
-        {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
+        if (!isReadOnly) {
+            calendar.AddRoom("Meeting Room1");
+            calendar.AddRoom("Meeting Room2");
+            calendar.AddRoom("Meeting Room3");
+            calendar.AddRoom("Meeting Room4");
         }
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
-        {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
-                }
-            }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
-                }
-            }
-            else {
-                sum = num1;          
-            }
+        calendar.ViewAllRooms();
 
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
-            }
+        if (!isReadOnly) {
+            calendar.BookMeeting("Meeting Room1", DateTime.Now.AddHours(1), DateTime.Now.AddHours(2), "John", "Some Title");
+            calendar.BookMeeting("Meeting Room2", DateTime.Now.AddHours(2), DateTime.Now.AddHours(3), "Steve", "Some Title");
+            calendar.BookMeeting("Meeting Room3", DateTime.Now.AddHours(3), DateTime.Now.AddHours(4), "Michael", "Some Title");
+            calendar.BookMeeting("Meeting Room4", DateTime.Now.AddHours(4), DateTime.Now.AddHours(5), "Oleg", "Some Title");
         }
 
-        static string Repeat(string text,int count)
-        {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
-        }
-        
-
-        
+        calendar.SeeBookedMeetings("Meeting Room1");
+        calendar.SeeBookedMeetings("Meeting Room2");
+        calendar.SeeBookedMeetings("Meeting Room3");
+        calendar.SeeBookedMeetings("Meeting Room4");
     }
 }
