@@ -2,7 +2,7 @@
 
 internal class Program
 {
-    static void Main ()
+    private static void Main ()
     {
         Calendar calendar = new Calendar();
         bool isReadOnly = false; // ReadOnly / RW mode
