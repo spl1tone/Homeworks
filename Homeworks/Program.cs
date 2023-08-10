@@ -14,7 +14,7 @@ internal class Program
     {
         using (HttpClient client = new HttpClient()) {
             try {
-                HttpResponseMessage response = await client.GetAsync("https://api.breakingbadquotes.xyz/v1/quotes/100");
+                var response = await client.GetAsync("https://api.breakingbadquotes.xyz/v1/quotes/100");
 
                 var quotesInfo = JsonConvert.DeserializeObject<APIModel[]>(await response.Content.ReadAsStringAsync());
 
