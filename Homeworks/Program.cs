@@ -10,5 +10,11 @@ public class Program
         Console.WriteLine();
         Books book2 = new Books(2, "Book2", "Nice2", "Vlad2", 1002, 2023);
         book2.PrintBook();
+
+        BooksTest booksTest = new();
+        booksTest.TestValidBook();
+        booksTest.TestInvalidId();
+        booksTest.TestInvalidYear();
+
     }
 }
