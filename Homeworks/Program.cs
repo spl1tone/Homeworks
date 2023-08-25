@@ -1,75 +1,49 @@
-﻿namespace Homeworks
+﻿namespace Homeworks;
+
+public class Program
 {
-    internal class Program
+    static void Main ()
     {
-        // Homework lesson-5
+        using (var db = new ShopDbContext()) {
+            var customer1 = new Customer {
+                FirstName = "Name1",
+                LastName = "Last Name",
+                Email = "email@gmail.com"
+            };
+            db.Customers.Add(customer1);
+            var customer2 = new Customer {
+                FirstName = "Name2",
+                LastName = "Last Name",
+                Email = "email@gmail.com"
+            };
+            db.Customers.Add(customer2);
+            var customer3 = new Customer {
+                FirstName = "Name3",
+                LastName = "Last Name",
+                Email = "email@gmail.com"
+            };
+            db.Customers.Add(customer3);
+            var customer4 = new Customer {
+                FirstName = "Name4",
+                LastName = "Last Name",
+                Email = "email@gmail.com"
+            };
+            db.Customers.Add(customer4);
 
-        static void Main (string[] args)
-        {
-            Console.WriteLine($"MaxValue: {MaxValue(5,10)}");
-            Console.WriteLine($"MinValue: {MinValue(5,10)}");
-            TrySumIfOdd(5, 10, out int sum);
-            Console.WriteLine($"Repeat SomeText: {Repeat("str",3)}");
-        }
+            db.SaveChanges();
 
-        static int MaxValue (int num1, int num2)
-        {
-            int value = Math.Max (num1, num2);
-            return value;
-        }
-        static int MaxValue (int num1, int num2,bool degree,int degreeNum)
-        {           
-            int value = Math.Max(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
-        static int MinValue (int num1, int num2)
-        {
-            int value = Math.Min(num1, num2);
-            return value;
-        }
-        static int MinValue (int num1, int num2, bool degree, int degreeNum)
-        {
-            int value = Math.Min(num1, num2);
-            if (degree) value = (int)Math.Pow(value, degreeNum);
-            return value;
-        }
+            var criteria = db.Customers
+                .OrderBy(firstName => firstName.FirstName)
+                .Select(firstName => firstName)
+                .ToList();
 
-        static void TrySumIfOdd (int num1, int num2, out int sum)
-        {
-            sum = 0;
-            if (num1 < num2) {
-                for(int i = num1; i < num2; i++) {
-                    sum += i;
-                }
+            Console.WriteLine("All First Names in the database:");
+            foreach (var c in criteria) {
+                Console.WriteLine(c.FirstName);
             }
-            else if (num1 > num2) {
-                for (int i = num2; i < num1; i++) {
-                    sum += i;
-                }
-            }
-            else {
-                sum = num1;          
-            }
-
-            if (sum % 2 == 0) {
-                Console.WriteLine($"{sum} - Це число парне");
-            }
-            else {
-                Console.WriteLine($"{sum} - Це число непарне");
-            }
+            Console.ReadLine();
         }
-
-        static string Repeat(string text,int count)
-        {
-            string rText = string.Empty;
-            for(int i = 0; i < count; i++) {
-                rText += text;
-            }
-            return rText;
-        }
-        
-
-        
     }
+
+
 }
