@@ -56,3 +56,17 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+#changeTextBtn{
+    font-size: 20px;
+    color:white;
+    background-color: rgb(58, 58, 58);
+    border: rgb(17, 0, 255) solid 1px;
+}
+
+#changeStyleBtn{
+    font-size: 20px;
+    color:white;
+    background-color: rgb(58, 58, 58);
+    border: rgb(17, 0, 255) solid 1px;
+}
