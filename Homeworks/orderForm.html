@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+
+    <title>Order Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+       <center> <h2>Order Form</h2> </center>
+        <form>
+            <div class="form-group">
+                <label for="product">Product:</label>
+                <input type="text" class="form-control" id="product" placeholder="Enter product name" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Shipping Address:</label>
+                <textarea class="form-control" id="address" rows="4" placeholder="Enter shipping address" required></textarea>
+            </div>
+           <center> <button type="submit" class="btn btn-primary btnWidth" onclick="Place()">Place Order</button> </center>
+        </form>
+    </div>
+    <script>
+
+     function Place(){
+        var productName = document.getElementById('product').value;
+        var quantity = document.getElementById('quantity').value;
+        var address = document.getElementById('address').value;
+
+        alert("Product Name: " + productName + "\nQuantity: " + quantity + "\nAdress: " + address)
+        
+     }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+
+    <title>Question Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <center> <h2>Question Form</h2> </center>
+        <form>
+            <div class="form-group">
+                <label for="question">Ask your question:</label>
+                <textarea class="form-control" id="question" rows="4" placeholder="Type your question here" required></textarea>
+            </div>
+            <center><button type="submit" class="btn btn-primary btnWidth" onclick="Submit()">Submit</button></center>
+        </form>
+    </div>
+
+<script>
+    function Submit(){
+    var question = document.getElementById('question').value;
+
+    alert("Question: " + question);
+
+    }
+</script>
+
+</body>
+</html>
